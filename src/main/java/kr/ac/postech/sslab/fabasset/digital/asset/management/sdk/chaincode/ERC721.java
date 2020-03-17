@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.chaincode.standard;
+package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.chaincode;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.SDK;
