@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util;
+package kr.ac.postech.sslab.fabasset.sdk.util;
 
 public final class Function {
     private Function() {}

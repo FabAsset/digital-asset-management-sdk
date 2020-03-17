@@ -1,7 +1,7 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.client;
+package kr.ac.postech.sslab.fabasset.sdk.client;
 
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.user.UserContext;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.Util;
+import kr.ac.postech.sslab.fabasset.sdk.user.UserContext;
+import kr.ac.postech.sslab.fabasset.sdk.util.Util;
 import org.hyperledger.fabric.sdk.Enrollment;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;

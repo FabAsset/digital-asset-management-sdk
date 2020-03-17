@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.client;
+package kr.ac.postech.sslab.fabasset.sdk.client;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 

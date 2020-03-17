@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.user;
+package kr.ac.postech.sslab.fabasset.sdk.user;
 
 import org.hyperledger.fabric.sdk.Enrollment;
 

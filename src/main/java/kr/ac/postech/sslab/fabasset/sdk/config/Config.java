@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.config;
+package kr.ac.postech.sslab.fabasset.sdk.config;
 
 import java.io.File;
 

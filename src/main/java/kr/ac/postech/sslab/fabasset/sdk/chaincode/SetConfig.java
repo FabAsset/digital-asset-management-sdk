@@ -1,9 +1,9 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.chaincode;
+package kr.ac.postech.sslab.fabasset.sdk.chaincode;
 
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.client.ChannelClient;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.client.FabricClient;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.config.Config;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.user.UserContext;
+import kr.ac.postech.sslab.fabasset.sdk.client.ChannelClient;
+import kr.ac.postech.sslab.fabasset.sdk.client.FabricClient;
+import kr.ac.postech.sslab.fabasset.sdk.config.Config;
+import kr.ac.postech.sslab.fabasset.sdk.user.UserContext;
 import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.TransactionException;

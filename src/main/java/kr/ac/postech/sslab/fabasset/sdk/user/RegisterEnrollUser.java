@@ -1,8 +1,8 @@
-package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.user;
+package kr.ac.postech.sslab.fabasset.sdk.user;
 
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.client.CAClient;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.config.Config;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.Util;
+import kr.ac.postech.sslab.fabasset.sdk.client.CAClient;
+import kr.ac.postech.sslab.fabasset.sdk.config.Config;
+import kr.ac.postech.sslab.fabasset.sdk.util.Util;
 
 public class RegisterEnrollUser {
 
