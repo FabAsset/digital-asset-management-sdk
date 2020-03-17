@@ -28,5 +28,5 @@ public final class Function {
     public static final String GET_XATTR_FUNCTION_NAME = "getXAttr";
 
     public static final String QUERY_FUNCTION_NAME = "query";
-    public static final String QUERY_HISTORY_FUNCTION_NAME = "queryHistory";
+    public static final String HISTORY_FUNCTION_NAME = "history";
 }

@@ -1,7 +1,5 @@
 package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.chaincode;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.SDK;
 import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.ChaincodeCommunication;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
@@ -15,16 +13,8 @@ import java.util.List;
 
 import static kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.Function.*;
 
-public class Default extends SDK {
+public class Default {
     private static final Logger logger = LogManager.getLogger(Default.class);
-
-    public Default() {
-        super();
-    }
-
-    public Default(ObjectMapper objectMapper) {
-        super(objectMapper);
-    }
 
     public boolean mint(String tokenId) throws ProposalException, InvalidArgumentException, TransactionException {
         logger.info("---------------- mint SDK called ----------------");
@@ -84,5 +74,40 @@ public class Default extends SDK {
             throw new ProposalException(e);
         }
         return tokenIds;
+    }
+
+    public String query(String tokenId) throws ProposalException, InvalidArgumentException, TransactionException {
+        logger.info("---------------- query SDK called ----------------");
+
+        String result;
+        try {
+            String[] args = { tokenId };
+            result = ChaincodeCommunication.queryByChainCode(QUERY_FUNCTION_NAME, args);
+        } catch (ProposalException e) {
+            logger.error(e);
+            throw new ProposalException(e);
+        }
+        return result;
+    }
+
+    public List<String> history(String tokenId) throws ProposalException, InvalidArgumentException, TransactionException {
+        logger.info("---------------- queryHistory SDK called ----------------");
+
+        List<String> histories = new ArrayList<String>();
+        String result;
+        try {
+
+            String[] args = { tokenId };
+            result = ChaincodeCommunication.queryByChainCode(HISTORY_FUNCTION_NAME, args);
+
+            if(result != null) {
+                histories = Arrays.asList(result.substring(1, result.length() - 1).split(", "));
+            }
+
+        } catch (ProposalException e) {
+            logger.error(e);
+            throw new ProposalException(e);
+        }
+        return histories;
     }
 }

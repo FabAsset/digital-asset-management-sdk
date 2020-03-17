@@ -3,9 +3,7 @@ package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.chaincode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.SDK;
 import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.ChaincodeCommunication;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.Manager;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -17,19 +15,10 @@ import java.util.*;
 
 import static kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.Function.*;
 
-public class TokenTypeManagement extends SDK {
+public class TokenTypeManagement {
     private static final Logger logger = LogManager.getLogger(TokenTypeManagement.class);
 
-    private ObjectMapper objectMapper;
-
-    public TokenTypeManagement() {
-        super();
-    }
-
-    public TokenTypeManagement(ObjectMapper objectMapper) {
-        super(objectMapper);
-        this.objectMapper = super.getObjectMapper();
-    }
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     public List<String> tokenTypesOf() throws ProposalException, InvalidArgumentException, TransactionException {
         logger.info("---------------- tokenTypesOf SDK called ----------------");

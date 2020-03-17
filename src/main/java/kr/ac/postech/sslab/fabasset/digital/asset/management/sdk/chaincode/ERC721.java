@@ -1,7 +1,5 @@
 package kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.chaincode;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.SDK;
 import kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.ChaincodeCommunication;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,16 +9,8 @@ import org.hyperledger.fabric.sdk.exception.TransactionException;
 
 import static kr.ac.postech.sslab.fabasset.digital.asset.management.sdk.util.Function.*;
 
-public class ERC721 extends SDK {
+public class ERC721 {
     private static final Logger logger = LogManager.getLogger(ERC721.class);
-
-    public ERC721() {
-        super();
-    }
-
-    public ERC721(ObjectMapper objectMapper) {
-        super(objectMapper);
-    }
 
     public long balanceOf(String owner) throws ProposalException, InvalidArgumentException, TransactionException {
         logger.info("---------------- balanceOf SDK called ----------------");
