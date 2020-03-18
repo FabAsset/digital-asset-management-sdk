@@ -1,6 +1,5 @@
 package kr.ac.postech.sslab.fabasset.sdk.chaincode;
 
-import kr.ac.postech.sslab.fabasset.sdk.util.ChaincodeCommunication;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.apache.log4j.LogManager;

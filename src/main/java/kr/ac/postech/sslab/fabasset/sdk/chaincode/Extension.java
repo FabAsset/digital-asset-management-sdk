@@ -2,7 +2,6 @@ package kr.ac.postech.sslab.fabasset.sdk.chaincode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ac.postech.sslab.fabasset.sdk.util.ChaincodeCommunication;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
