@@ -2,6 +2,7 @@ package kr.ac.postech.sslab.fabasset.sdk.chaincode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.ac.postech.sslab.fabasset.sdk.user.AddressUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -23,6 +24,10 @@ public class Extension {
 
         long balance;
         try {
+            if (!AddressUtils.isValidAddress(owner)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { owner, type };
             String balanceStr = InvokeChaincode.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
             balance = Long.parseLong(balanceStr);
@@ -38,6 +43,10 @@ public class Extension {
 
         List<String> tokenIds = new ArrayList<String>();
         try {
+            if (!AddressUtils.isValidAddress(owner)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { owner, type };
             String tokenIdsStr = InvokeChaincode.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
 
@@ -59,7 +68,7 @@ public class Extension {
             String xattrJson = objectMapper.writeValueAsString(xattr);
             String uriJson = objectMapper.writeValueAsString(uri);
             String[] args = { tokenId, type, xattrJson, uriJson };
-            result = InvokeChaincode.sendTransaction(MINT_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(MINT_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -73,7 +82,7 @@ public class Extension {
         boolean result;
         try {
             String[] args = { tokenId, index, value };
-            result = InvokeChaincode.sendTransaction(SET_URI_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(SET_URI_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -101,7 +110,7 @@ public class Extension {
         boolean result;
         try {
             String[] args = { tokenId, index, String.valueOf(value) };
-            result = InvokeChaincode.sendTransaction(SET_XATTR_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(SET_XATTR_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);

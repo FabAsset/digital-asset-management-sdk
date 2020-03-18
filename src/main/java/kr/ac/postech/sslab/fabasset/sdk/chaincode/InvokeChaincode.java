@@ -16,7 +16,7 @@ public class InvokeChaincode {
 
     private InvokeChaincode() {}
 
-    public static boolean sendTransaction(String function, String[] args) throws InvalidArgumentException, TransactionException, ProposalException {
+    public static boolean submitTransaction(String function, String[] args) throws InvalidArgumentException, TransactionException, ProposalException {
         boolean result = false;
 
         FabricClient fabClient = SetConfig.getFabClient();

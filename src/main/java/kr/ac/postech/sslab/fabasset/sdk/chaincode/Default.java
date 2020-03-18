@@ -1,5 +1,6 @@
 package kr.ac.postech.sslab.fabasset.sdk.chaincode;
 
+import kr.ac.postech.sslab.fabasset.sdk.user.AddressUtils;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.apache.log4j.LogManager;
@@ -21,7 +22,7 @@ public class Default {
         boolean result;
         try {
             String[] args = { tokenId };
-            result = InvokeChaincode.sendTransaction(MINT_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(MINT_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -35,7 +36,7 @@ public class Default {
         boolean result;
         try {
             String[] args = { tokenId };
-            result = InvokeChaincode.sendTransaction(BURN_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(BURN_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -62,6 +63,10 @@ public class Default {
 
         List<String> tokenIds = new ArrayList<String>();
         try {
+            if (!AddressUtils.isValidAddress(owner)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { owner };
             String tokenIdsStr = InvokeChaincode.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
 

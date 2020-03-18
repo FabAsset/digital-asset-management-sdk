@@ -44,7 +44,7 @@ public class TokenTypeManagement {
         try {
             String json = objectMapper.writeValueAsString(xattr);
             String[] args = { type, json };
-            result = InvokeChaincode.sendTransaction(ENROLL_TOKEN_TYPE_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(ENROLL_TOKEN_TYPE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -58,7 +58,7 @@ public class TokenTypeManagement {
         boolean result;
         try {
             String[] args = { type };
-            result = InvokeChaincode.sendTransaction(DROP_TOKEN_TYPE_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(DROP_TOKEN_TYPE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);

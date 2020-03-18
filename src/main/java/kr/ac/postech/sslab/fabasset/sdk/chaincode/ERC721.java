@@ -1,5 +1,6 @@
 package kr.ac.postech.sslab.fabasset.sdk.chaincode;
 
+import kr.ac.postech.sslab.fabasset.sdk.user.AddressUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -16,6 +17,10 @@ public class ERC721 {
 
         long balance;
         try {
+            if (!AddressUtils.isValidAddress(owner)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { owner };
             String balanceStr = InvokeChaincode.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
             balance = Long.parseLong(balanceStr);
@@ -46,8 +51,12 @@ public class ERC721 {
 
         boolean result;
         try {
+            if (!AddressUtils.isValidAddress(from) || !AddressUtils.isValidAddress(to)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { from, to, tokenId };
-            result = InvokeChaincode.sendTransaction(TRANSFER_FROM_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(TRANSFER_FROM_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -60,8 +69,12 @@ public class ERC721 {
 
         boolean result;
         try {
+            if (!AddressUtils.isValidAddress(approved)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { approved, tokenId };
-            result = InvokeChaincode.sendTransaction(APPROVE_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(APPROVE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -74,8 +87,12 @@ public class ERC721 {
 
         boolean result;
         try {
+            if (!AddressUtils.isValidAddress(operator)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { operator, Boolean.toString(approved) };
-            result = InvokeChaincode.sendTransaction(SET_APPROVAL_FOR_ALL_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(SET_APPROVAL_FOR_ALL_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -102,6 +119,10 @@ public class ERC721 {
 
         boolean result;
         try {
+            if (!AddressUtils.isValidAddress(owner) || !AddressUtils.isValidAddress(operator)) {
+                throw new IllegalArgumentException();
+            }
+
             String[] args = { owner, operator };
             String response = InvokeChaincode.queryByChainCode(IS_APPROVED_FOR_ALL_FUNCTION_NAME, args);
             result = Boolean.parseBoolean(response);
