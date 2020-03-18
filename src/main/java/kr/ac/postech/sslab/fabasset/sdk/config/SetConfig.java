@@ -1,8 +1,7 @@
-package kr.ac.postech.sslab.fabasset.sdk.chaincode;
+package kr.ac.postech.sslab.fabasset.sdk.config;
 
 import kr.ac.postech.sslab.fabasset.sdk.client.ChannelClient;
 import kr.ac.postech.sslab.fabasset.sdk.client.FabricClient;
-import kr.ac.postech.sslab.fabasset.sdk.config.Config;
 import kr.ac.postech.sslab.fabasset.sdk.user.UserContext;
 import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
