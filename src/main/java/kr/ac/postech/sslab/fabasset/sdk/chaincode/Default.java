@@ -21,7 +21,7 @@ public class Default {
         boolean result;
         try {
             String[] args = { tokenId };
-            result = ChaincodeCommunication.sendTransaction(MINT_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(MINT_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -35,7 +35,7 @@ public class Default {
         boolean result;
         try {
             String[] args = { tokenId };
-            result = ChaincodeCommunication.sendTransaction(BURN_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(BURN_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -49,7 +49,7 @@ public class Default {
         String type;
         try {
             String[] args = { tokenId };
-            type = ChaincodeCommunication.queryByChainCode(GET_TYPE_FUNCTION_NAME, args);
+            type = InvokeChaincode.queryByChainCode(GET_TYPE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -63,7 +63,7 @@ public class Default {
         List<String> tokenIds = new ArrayList<String>();
         try {
             String[] args = { owner };
-            String tokenIdsStr = ChaincodeCommunication.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
+            String tokenIdsStr = InvokeChaincode.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
 
             if(tokenIdsStr != null) {
                 tokenIds = Arrays.asList(tokenIdsStr.substring(1, tokenIdsStr.length() - 1).split(", "));
@@ -81,7 +81,7 @@ public class Default {
         String result;
         try {
             String[] args = { tokenId };
-            result = ChaincodeCommunication.queryByChainCode(QUERY_FUNCTION_NAME, args);
+            result = InvokeChaincode.queryByChainCode(QUERY_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -97,7 +97,7 @@ public class Default {
         try {
 
             String[] args = { tokenId };
-            result = ChaincodeCommunication.queryByChainCode(HISTORY_FUNCTION_NAME, args);
+            result = InvokeChaincode.queryByChainCode(HISTORY_FUNCTION_NAME, args);
 
             if(result != null) {
                 histories = Arrays.asList(result.substring(1, result.length() - 1).split(", "));

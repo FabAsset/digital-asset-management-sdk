@@ -17,7 +17,7 @@ public class ERC721 {
         long balance;
         try {
             String[] args = { owner };
-            String balanceStr = ChaincodeCommunication.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
+            String balanceStr = InvokeChaincode.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
             balance = Long.parseLong(balanceStr);
         } catch (ProposalException e) {
             logger.error(e);
@@ -32,7 +32,7 @@ public class ERC721 {
         String owner;
         try {
             String[] args = { tokenId };
-            owner = ChaincodeCommunication.queryByChainCode(OWNER_OF_FUNCTION_NAME, args);
+            owner = InvokeChaincode.queryByChainCode(OWNER_OF_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -47,7 +47,7 @@ public class ERC721 {
         boolean result;
         try {
             String[] args = { from, to, tokenId };
-            result = ChaincodeCommunication.sendTransaction(TRANSFER_FROM_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(TRANSFER_FROM_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -61,7 +61,7 @@ public class ERC721 {
         boolean result;
         try {
             String[] args = { approved, tokenId };
-            result = ChaincodeCommunication.sendTransaction(APPROVE_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(APPROVE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -75,7 +75,7 @@ public class ERC721 {
         boolean result;
         try {
             String[] args = { operator, Boolean.toString(approved) };
-            result = ChaincodeCommunication.sendTransaction(SET_APPROVAL_FOR_ALL_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(SET_APPROVAL_FOR_ALL_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -89,7 +89,7 @@ public class ERC721 {
         String approved;
         try {
             String[] args = { tokenId };
-            approved = ChaincodeCommunication.queryByChainCode(GET_APPROVED_FUNCTION_NAME, args);
+            approved = InvokeChaincode.queryByChainCode(GET_APPROVED_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -103,7 +103,7 @@ public class ERC721 {
         boolean result;
         try {
             String[] args = { owner, operator };
-            String response = ChaincodeCommunication.queryByChainCode(IS_APPROVED_FOR_ALL_FUNCTION_NAME, args);
+            String response = InvokeChaincode.queryByChainCode(IS_APPROVED_FOR_ALL_FUNCTION_NAME, args);
             result = Boolean.parseBoolean(response);
         } catch (ProposalException e) {
             logger.error(e);

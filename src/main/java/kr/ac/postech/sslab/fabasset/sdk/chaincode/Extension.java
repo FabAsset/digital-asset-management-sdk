@@ -24,7 +24,7 @@ public class Extension {
         long balance;
         try {
             String[] args = { owner, type };
-            String balanceStr = ChaincodeCommunication.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
+            String balanceStr = InvokeChaincode.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
             balance = Long.parseLong(balanceStr);
         } catch (ProposalException e) {
             logger.error(e);
@@ -39,7 +39,7 @@ public class Extension {
         List<String> tokenIds = new ArrayList<String>();
         try {
             String[] args = { owner, type };
-            String tokenIdsStr = ChaincodeCommunication.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
+            String tokenIdsStr = InvokeChaincode.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
 
             if(tokenIdsStr != null) {
                 tokenIds = Arrays.asList(tokenIdsStr.substring(1, tokenIdsStr.length() - 1).split(", "));
@@ -59,7 +59,7 @@ public class Extension {
             String xattrJson = objectMapper.writeValueAsString(xattr);
             String uriJson = objectMapper.writeValueAsString(uri);
             String[] args = { tokenId, type, xattrJson, uriJson };
-            result = ChaincodeCommunication.sendTransaction(MINT_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(MINT_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -73,7 +73,7 @@ public class Extension {
         boolean result;
         try {
             String[] args = { tokenId, index, value };
-            result = ChaincodeCommunication.sendTransaction(SET_URI_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(SET_URI_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -87,7 +87,7 @@ public class Extension {
         String value;
         try {
             String[] args = { tokenId, index };
-            value = ChaincodeCommunication.queryByChainCode(GET_URI_FUNCTION_NAME, args);
+            value = InvokeChaincode.queryByChainCode(GET_URI_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -101,7 +101,7 @@ public class Extension {
         boolean result;
         try {
             String[] args = { tokenId, index, String.valueOf(value) };
-            result = ChaincodeCommunication.sendTransaction(SET_XATTR_FUNCTION_NAME, args);
+            result = InvokeChaincode.sendTransaction(SET_XATTR_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -115,7 +115,7 @@ public class Extension {
         String value;
         try {
             String[] args = { tokenId, index };
-            value = ChaincodeCommunication.queryByChainCode(GET_XATTR_FUNCTION_NAME, args);
+            value = InvokeChaincode.queryByChainCode(GET_XATTR_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);

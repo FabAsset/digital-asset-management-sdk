@@ -11,10 +11,10 @@ import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.exception.TransactionException;
 import java.util.Collection;
 
-public class ChaincodeCommunication {
+public class InvokeChaincode {
     private static String chaincodeId = Manager.getChaincodeId();
 
-    private ChaincodeCommunication() {}
+    private InvokeChaincode() {}
 
     public static boolean sendTransaction(String function, String[] args) throws InvalidArgumentException, TransactionException, ProposalException {
         boolean result = false;
