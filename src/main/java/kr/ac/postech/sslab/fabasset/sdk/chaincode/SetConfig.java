@@ -8,24 +8,27 @@ import org.hyperledger.fabric.sdk.*;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.TransactionException;
 
+import java.util.Collection;
+
 public class SetConfig {
-    static String owner;
-    static String receiver;
-    static Enrollment enrollment;
+    private static String owner;
+    private static String receiver;
+    private static Enrollment enrollment;
 
-    static UserContext userContext;
-    static FabricClient fabClient;
+    private static UserContext userContext;
+    private static FabricClient fabClient;
+    private static ChannelClient channelClient;
 
-    public static UserContext initUserContext() {
+    public static UserContext initUserContext(String user, Enrollment enrollment, String org, String mspId) {
         if(enrollment == null) {
             System.out.println("No enrollment");
             return null;
         }
 
         userContext = new UserContext();
-        userContext.setName(owner);
-        userContext.setAffiliation(Config.ORG1);
-        userContext.setMspId(Config.ORG1_MSP);
+        userContext.setName(user);
+        userContext.setAffiliation(org);
+        userContext.setMspId(mspId);
         userContext.setEnrollment(enrollment);
 
         return userContext;
@@ -35,7 +38,7 @@ public class SetConfig {
         return fabClient;
     }
 
-    public static ChannelClient initChannel() throws InvalidArgumentException, TransactionException {
+    public static ChannelClient initChannel(String channelName, Collection<Peer> peers, Collection<Orderer> orderers, EventHub eventHub) throws InvalidArgumentException, TransactionException {
 
         try {
             fabClient = new FabricClient(userContext);
@@ -43,16 +46,24 @@ public class SetConfig {
             e.printStackTrace();
         }
 
-        ChannelClient channelClient = fabClient.createChannelClient(Config.CHANNEL_NAME);
+        ChannelClient channelClient = fabClient.createChannelClient(channelName);
         Channel channel = channelClient.getChannel();
-        Peer peer = fabClient.getInstance().newPeer(Config.ORG1_PEER_0, Config.ORG1_PEER_0_URL);
-        EventHub eventHub = fabClient.getInstance().newEventHub("eventhub01", Config.EVENT_HUB);
-        Orderer orderer = fabClient.getInstance().newOrderer(Config.ORDERER_NAME, Config.ORDERER_URL);
-        channel.addPeer(peer);
+        for (Peer peer: peers) {
+            channel.addPeer(peer);
+        }
+
         channel.addEventHub(eventHub);
-        channel.addOrderer(orderer);
+
+        for (Orderer orderer: orderers) {
+            channel.addOrderer(orderer);
+        }
+
         channel.initialize();
 
+        return channelClient;
+    }
+
+    public static ChannelClient getChannelClient() {
         return channelClient;
     }
 
