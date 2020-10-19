@@ -1,13 +1,13 @@
-package kr.ac.postech.sslab.fabasset.sdk.chaincode;
+package com.github.fabasset.sdk.chaincode;
 
-import kr.ac.postech.sslab.fabasset.sdk.user.AddressUtils;
+import com.github.fabasset.sdk.user.AddressUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.exception.TransactionException;
 
-import static kr.ac.postech.sslab.fabasset.sdk.util.Function.*;
+import static com.github.fabasset.sdk.util.Function.*;
 
 public class ERC721 {
     private static final Logger logger = LogManager.getLogger(ERC721.class);

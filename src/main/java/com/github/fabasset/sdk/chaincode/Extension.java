@@ -1,8 +1,9 @@
-package kr.ac.postech.sslab.fabasset.sdk.chaincode;
+package com.github.fabasset.sdk.chaincode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kr.ac.postech.sslab.fabasset.sdk.user.AddressUtils;
+import com.github.fabasset.sdk.user.AddressUtils;
+import com.github.fabasset.sdk.util.Function;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -10,8 +11,6 @@ import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.exception.TransactionException;
 
 import java.util.*;
-
-import static kr.ac.postech.sslab.fabasset.sdk.util.Function.*;
 
 public class Extension {
 
@@ -29,7 +28,7 @@ public class Extension {
             }
 
             String[] args = { owner, type };
-            String balanceStr = InvokeChaincode.queryByChainCode(BALANCE_OF_FUNCTION_NAME, args);
+            String balanceStr = InvokeChaincode.queryByChainCode(Function.BALANCE_OF_FUNCTION_NAME, args);
             balance = Long.parseLong(balanceStr);
         } catch (ProposalException e) {
             logger.error(e);
@@ -48,7 +47,7 @@ public class Extension {
             }
 
             String[] args = { owner, type };
-            String tokenIdsStr = InvokeChaincode.queryByChainCode(TOKEN_IDS_OF_FUNCTION_NAME, args);
+            String tokenIdsStr = InvokeChaincode.queryByChainCode(Function.TOKEN_IDS_OF_FUNCTION_NAME, args);
 
             if(tokenIdsStr != null) {
                 tokenIds = Arrays.asList(tokenIdsStr.substring(1, tokenIdsStr.length() - 1).split(", "));
@@ -68,7 +67,7 @@ public class Extension {
             String xattrJson = objectMapper.writeValueAsString(xattr);
             String uriJson = objectMapper.writeValueAsString(uri);
             String[] args = { tokenId, type, xattrJson, uriJson };
-            result = InvokeChaincode.submitTransaction(MINT_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(Function.MINT_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -82,7 +81,7 @@ public class Extension {
         boolean result;
         try {
             String[] args = { tokenId, index, value };
-            result = InvokeChaincode.submitTransaction(SET_URI_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(Function.SET_URI_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -96,7 +95,7 @@ public class Extension {
         String value;
         try {
             String[] args = { tokenId, index };
-            value = InvokeChaincode.queryByChainCode(GET_URI_FUNCTION_NAME, args);
+            value = InvokeChaincode.queryByChainCode(Function.GET_URI_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -110,7 +109,7 @@ public class Extension {
         boolean result;
         try {
             String[] args = { tokenId, index, String.valueOf(value) };
-            result = InvokeChaincode.submitTransaction(SET_XATTR_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(Function.SET_XATTR_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -124,7 +123,7 @@ public class Extension {
         String value;
         try {
             String[] args = { tokenId, index };
-            value = InvokeChaincode.queryByChainCode(GET_XATTR_FUNCTION_NAME, args);
+            value = InvokeChaincode.queryByChainCode(Function.GET_XATTR_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);

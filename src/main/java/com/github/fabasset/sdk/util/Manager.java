@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.sdk.util;
+package com.github.fabasset.sdk.util;
 
 public class Manager {
     private static String chaincodeId;

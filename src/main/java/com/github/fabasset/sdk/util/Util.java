@@ -1,7 +1,7 @@
-package kr.ac.postech.sslab.fabasset.sdk.util;
+package com.github.fabasset.sdk.util;
 
-import kr.ac.postech.sslab.fabasset.sdk.user.CAEnrollment;
-import kr.ac.postech.sslab.fabasset.sdk.user.UserContext;
+import com.github.fabasset.sdk.user.CAEnrollment;
+import com.github.fabasset.sdk.user.UserContext;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
 
 import javax.xml.bind.DatatypeConverter;

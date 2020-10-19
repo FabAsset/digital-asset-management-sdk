@@ -1,8 +1,9 @@
-package kr.ac.postech.sslab.fabasset.sdk.chaincode;
+package com.github.fabasset.sdk.chaincode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fabasset.sdk.util.Function;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
@@ -11,8 +12,6 @@ import org.hyperledger.fabric.sdk.exception.TransactionException;
 
 import java.io.IOException;
 import java.util.*;
-
-import static kr.ac.postech.sslab.fabasset.sdk.util.Function.*;
 
 public class TokenTypeManagement {
     private static final Logger logger = LogManager.getLogger(TokenTypeManagement.class);
@@ -26,7 +25,7 @@ public class TokenTypeManagement {
         List<String> tokenTypes = new ArrayList<String>();
         try {
             String[] args = {};
-            tokenTypsString = InvokeChaincode.queryByChainCode(TOKEN_TYPES_OF_FUNCTION_NAME, args);
+            tokenTypsString = InvokeChaincode.queryByChainCode(Function.TOKEN_TYPES_OF_FUNCTION_NAME, args);
             if (tokenTypsString != null) {
                 tokenTypes = Arrays.asList(tokenTypsString.substring(1, tokenTypsString.length() - 1).split(", "));
             }
@@ -44,7 +43,7 @@ public class TokenTypeManagement {
         try {
             String json = objectMapper.writeValueAsString(xattr);
             String[] args = { type, json };
-            result = InvokeChaincode.submitTransaction(ENROLL_TOKEN_TYPE_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(Function.ENROLL_TOKEN_TYPE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -58,7 +57,7 @@ public class TokenTypeManagement {
         boolean result;
         try {
             String[] args = { type };
-            result = InvokeChaincode.submitTransaction(DROP_TOKEN_TYPE_FUNCTION_NAME, args);
+            result = InvokeChaincode.submitTransaction(Function.DROP_TOKEN_TYPE_FUNCTION_NAME, args);
         } catch (ProposalException e) {
             logger.error(e);
             throw new ProposalException(e);
@@ -73,7 +72,7 @@ public class TokenTypeManagement {
         Map<String, List<String>> xattr = new HashMap<String, List<String>>();
         try {
             String[] args = { type };
-            json = InvokeChaincode.queryByChainCode(RETRIEVE_TOKEN_TYPE_FUNCTION_NAME, args);
+            json = InvokeChaincode.queryByChainCode(Function.RETRIEVE_TOKEN_TYPE_FUNCTION_NAME, args);
             if (json != null) {
                 xattr = objectMapper.readValue(json, new TypeReference<Map<String, List<String>>>() {});
             }
@@ -91,7 +90,7 @@ public class TokenTypeManagement {
         List<String> pair = new ArrayList<String>();
         try {
             String[] args = { type, attribute };
-            string = InvokeChaincode.queryByChainCode(RETRIEVE_ATTRIBUTE_OF_TOKEN_TYPE_FUNCTION_NAME, args);
+            string = InvokeChaincode.queryByChainCode(Function.RETRIEVE_ATTRIBUTE_OF_TOKEN_TYPE_FUNCTION_NAME, args);
             if (string != null) {
                 pair = Arrays.asList(string.substring(1, string.length() - 1).split(", "));
             }

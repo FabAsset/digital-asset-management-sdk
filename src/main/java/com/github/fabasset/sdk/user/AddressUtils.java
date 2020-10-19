@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.sdk.user;
+package com.github.fabasset.sdk.user;
 
 import org.bouncycastle.jcajce.provider.digest.Keccak;
 import org.bouncycastle.util.io.pem.PemReader;

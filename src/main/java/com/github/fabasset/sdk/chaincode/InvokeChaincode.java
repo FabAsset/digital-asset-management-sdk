@@ -1,9 +1,9 @@
-package kr.ac.postech.sslab.fabasset.sdk.chaincode;
+package com.github.fabasset.sdk.chaincode;
 
-import kr.ac.postech.sslab.fabasset.sdk.client.ChannelClient;
-import kr.ac.postech.sslab.fabasset.sdk.client.FabricClient;
-import kr.ac.postech.sslab.fabasset.sdk.config.SetConfig;
-import kr.ac.postech.sslab.fabasset.sdk.util.Manager;
+import com.github.fabasset.sdk.client.ChannelClient;
+import com.github.fabasset.sdk.client.FabricClient;
+import com.github.fabasset.sdk.util.Manager;
+import com.github.fabasset.sdk.config.SetConfig;
 import org.hyperledger.fabric.sdk.ChaincodeID;
 import org.hyperledger.fabric.sdk.ProposalResponse;
 import org.hyperledger.fabric.sdk.TransactionProposalRequest;

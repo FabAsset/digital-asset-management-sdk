@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.sdk.config;
+package com.github.fabasset.sdk.config;
 
 import java.io.File;
 

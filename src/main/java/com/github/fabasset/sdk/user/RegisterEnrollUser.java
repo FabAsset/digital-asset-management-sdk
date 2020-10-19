@@ -1,8 +1,8 @@
-package kr.ac.postech.sslab.fabasset.sdk.user;
+package com.github.fabasset.sdk.user;
 
-import kr.ac.postech.sslab.fabasset.sdk.client.CAClient;
-import kr.ac.postech.sslab.fabasset.sdk.config.Config;
-import kr.ac.postech.sslab.fabasset.sdk.util.Util;
+import com.github.fabasset.sdk.client.CAClient;
+import com.github.fabasset.sdk.config.Config;
+import com.github.fabasset.sdk.util.Util;
 
 public class RegisterEnrollUser {
 

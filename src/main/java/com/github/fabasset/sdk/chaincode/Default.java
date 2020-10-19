@@ -1,6 +1,6 @@
-package kr.ac.postech.sslab.fabasset.sdk.chaincode;
+package com.github.fabasset.sdk.chaincode;
 
-import kr.ac.postech.sslab.fabasset.sdk.user.AddressUtils;
+import com.github.fabasset.sdk.user.AddressUtils;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.apache.log4j.LogManager;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static kr.ac.postech.sslab.fabasset.sdk.util.Function.*;
+import static com.github.fabasset.sdk.util.Function.*;
 
 public class Default {
     private static final Logger logger = LogManager.getLogger(Default.class);

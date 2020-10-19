@@ -1,4 +1,4 @@
-package kr.ac.postech.sslab.fabasset.sdk.util;
+package com.github.fabasset.sdk.util;
 
 public final class Function {
     private Function() {}
