@@ -2,46 +2,47 @@ package com.github.fabasset.sdk.chaincode;
 
 import com.github.fabasset.sdk.client.ChannelClient;
 import com.github.fabasset.sdk.client.FabricClient;
-import com.github.fabasset.sdk.util.Manager;
-import com.github.fabasset.sdk.config.SetConfig;
 import org.hyperledger.fabric.sdk.ChaincodeID;
 import org.hyperledger.fabric.sdk.ProposalResponse;
-import org.hyperledger.fabric.sdk.TransactionProposalRequest;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
-import org.hyperledger.fabric.sdk.exception.TransactionException;
+
 import java.util.Collection;
 
 public class InvokeChaincode {
-    private static String chaincodeId = Manager.getChaincodeId();
+    private static InvokeChaincode instance = new InvokeChaincode();
 
     private InvokeChaincode() {}
 
-    public static boolean submitTransaction(String function, String[] args) throws InvalidArgumentException, TransactionException, ProposalException {
-        boolean result = false;
+    public static InvokeChaincode getInstance() {
+        return instance;
+    }
 
-        FabricClient fabClient = SetConfig.getFabClient();
+    public String submitTransaction(ChaincodeProxy chaincodeProxy, String chaincodeId, String functionName, String[] args) throws InvalidArgumentException, ProposalException {
+        String result = null;
 
-        TransactionProposalRequest request = fabClient.getInstance().newTransactionProposalRequest();
-        ChaincodeID ccid = ChaincodeID.newBuilder().setName(chaincodeId).build();
-        request.setChaincodeID(ccid);
-        request.setFcn(function);
-        request.setArgs(args);
+        ChaincodeRequest chaincodeRequest = new ChaincodeRequest();
+        chaincodeRequest.setChaincodeName(chaincodeId);
+        chaincodeRequest.setFunctionName(functionName);
+        chaincodeRequest.setArgs(args);
 
-        ChannelClient channelClient = SetConfig.getChannelClient();
-        Collection<ProposalResponse> responses = channelClient.sendTransactionProposal(request);
+        Collection<ProposalResponse> responses = chaincodeProxy.submitTransaction(chaincodeRequest);
         for (ProposalResponse response : responses) {
-            result = Boolean.parseBoolean(response.getMessage());
+            result = response.getMessage();
         }
 
         return result;
     }
 
-    public static String queryByChainCode(String function, String[] args) throws InvalidArgumentException, TransactionException, ProposalException {
+    public String queryByChainCode(ChaincodeProxy chaincodeProxy, String chaincodeId, String functionName, String[] args) throws InvalidArgumentException, ProposalException {
         String result = null;
 
-        ChannelClient channelClient = SetConfig.getChannelClient();
-        Collection<ProposalResponse> responses = channelClient.queryByChainCode(chaincodeId, function, args);
+        ChaincodeRequest chaincodeRequest = new ChaincodeRequest();
+        chaincodeRequest.setChaincodeName(chaincodeId);
+        chaincodeRequest.setFunctionName(functionName);
+        chaincodeRequest.setArgs(args);
+
+        Collection<ProposalResponse> responses = chaincodeProxy.queryByChainCode(chaincodeRequest);
         for (ProposalResponse response : responses) {
             result = response.getMessage();
         }

@@ -1,3 +1,16 @@
+/******************************************************
+ *  Copyright 2018 IBM Corporation
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 package com.github.fabasset.sdk.util;
 
 import com.github.fabasset.sdk.user.CAEnrollment;
@@ -16,11 +29,17 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Balaji Kadambi
+ *
+ */
+
 public class Util {
 
 	/**
 	 * Serialize user
-	 * 
+	 *
 	 * @param userContext
 	 * @throws Exception
 	 */
@@ -43,7 +62,7 @@ public class Util {
 
 	/**
 	 * Deserialize user
-	 * 
+	 *
 	 * @param affiliation
 	 * @param username
 	 * @return
@@ -62,7 +81,6 @@ public class Util {
 
 			in.close();
 			fileStream.close();
-
 			return uContext;
 		}
 
@@ -71,7 +89,7 @@ public class Util {
 
 	/**
 	 * Create enrollment from key and certificate files.
-	 * 
+	 *
 	 * @param folderPath
 	 * @param keyFileName
 	 * @param certFileName
@@ -104,7 +122,7 @@ public class Util {
 
 			byte[] encoded = DatatypeConverter.parseBase64Binary(keyBuilder.toString());
 			PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(encoded);
-			KeyFactory kf = KeyFactory.getInstance("ECDSA");
+			KeyFactory kf = KeyFactory.getInstance("EC");
 			key = kf.generatePrivate(keySpec);
 		} finally {
 			isKey.close();
@@ -114,27 +132,27 @@ public class Util {
 		CAEnrollment enrollment = new CAEnrollment(key, certificate);
 		return enrollment;
 	}
-	
+
 	public static void cleanUp() {
 		String directoryPath = "users";
 		File directory = new File(directoryPath);
 		deleteDirectory(directory);
 	}
-	
-	  public static boolean deleteDirectory(File dir) {
-	        if (dir.isDirectory()) {
-	            File[] children = dir.listFiles();
-	            for (int i = 0; i < children.length; i++) {
-	                boolean success = deleteDirectory(children[i]);
-	                if (!success) {
-	                    return false;
-	                }
-	            }
-	        }
 
-	        // either file or an empty directory
-	        Logger.getLogger(Util.class.getName()).log(Level.INFO, "Deleting - " + dir.getName());
-	        return dir.delete();
-	    }
+	public static boolean deleteDirectory(File dir) {
+		if (dir.isDirectory()) {
+			File[] children = dir.listFiles();
+			for (int i = 0; i < children.length; i++) {
+				boolean success = deleteDirectory(children[i]);
+				if (!success) {
+					return false;
+				}
+			}
+		}
+
+		// either file or an empty directory
+		Logger.getLogger(Util.class.getName()).log(Level.INFO, "Deleting - " + dir.getName());
+		return dir.delete();
+	}
 
 }
