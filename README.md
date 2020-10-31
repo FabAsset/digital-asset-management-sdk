@@ -1,3 +1,6 @@
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.fabasset/sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.fabasset/sdk)
+
+
 # FabAsset SDK
 
 This repository is source code for FabAsset SDK. For more information, read **FabAsset: Unique Digital Asset Management System for Hyperledger Fabric**, which is presented in BlockApp 2020 co-located with ICDCS 2020.
