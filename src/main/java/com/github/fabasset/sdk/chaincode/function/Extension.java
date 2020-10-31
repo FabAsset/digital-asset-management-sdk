@@ -26,8 +26,11 @@ public class Extension {
 
     private String chaincodeName;
 
-    public Extension(ChaincodeProxy chaincodeProxy, String chaincodeName) {
+    public void setChaincodeProxy(ChaincodeProxy chaincodeProxy) {
         this.chaincodeProxy = chaincodeProxy;
+    }
+
+    public void setChaincodeName(String chaincodeName) {
         this.chaincodeName = chaincodeName;
     }
 

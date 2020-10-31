@@ -20,8 +20,11 @@ public class ERC721 {
 
     private String chaincodeName;
 
-    public ERC721(ChaincodeProxy chaincodeProxy, String chaincodeName) {
+    public void setChaincodeProxy(ChaincodeProxy chaincodeProxy) {
         this.chaincodeProxy = chaincodeProxy;
+    }
+
+    public void setChaincodeName(String chaincodeName) {
         this.chaincodeName = chaincodeName;
     }
 
