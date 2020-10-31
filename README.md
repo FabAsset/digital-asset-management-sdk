@@ -1,5 +1,4 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.fabasset/sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.fabasset/sdk)
-
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.fabasset/sdk.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.fabasset%22%20AND%20a:%22sdk%22)
 
 # FabAsset SDK
 
